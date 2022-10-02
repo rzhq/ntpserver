@@ -287,6 +287,9 @@ class WorkThread(threading.Thread):
                 sendPacket.root_dispersion = 0x0aa7
                 sendPacket.ref_id = 0x808a8c2c
                 '''
+                # timestamp modification
+                recvTimestamp += 3600 if time.localtime().tm_isdst > 0 else 0
+                
                 sendPacket.ref_timestamp = recvTimestamp - 5
                 sendPacket.SetOriginTimeStamp(timeStamp_high, timeStamp_low)
                 sendPacket.recv_timestamp = recvTimestamp
